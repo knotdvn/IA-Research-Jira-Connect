@@ -1,0 +1,236 @@
+/*
+	Theme Name: OTFORMS
+	Theme URI: 
+	Description: A theme for posting jira issues
+	Version: 0.0
+	Author: dvn-Spiders
+	Author URI: spiders.syr.edu
+	Tags: 
+*/
+
+body{
+	background-color:#F47321;
+	min-width:100%;
+	min-height:100%;
+}
+
+p{
+	margin:0;
+}
+
+h1, h2, h3, h4 {
+	color: white;
+}
+
+ul{
+	padding: 10px;
+}
+.ribbon{
+
+
+	width:100%;
+	height:100%;
+	min-width: 320px;
+	
+}
+
+.wrap{
+	width:1200px;
+	min-width:320px;
+	margin-left:auto;
+	margin-right:auto;
+
+}
+
+
+.button{
+	background-color: #F47321;
+    border-radius: 8px 8px 8px 8px;
+    box-shadow: 0 9px 0 #C35C1A, 0 9px 15px rgba(0, 0, 0, 0.7);
+    color: #FFFFFF;
+    display: block;
+    font-size: 36px;
+    font-weight: 700;
+    margin: 20px auto;
+    padding: 4px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.1s ease 0s;
+    width: 160px;
+}
+
+.button p{
+	margin: 0px;
+}
+
+.button:active {
+    box-shadow: 0 3px 0 #C35C1A, 0 3px 6px rgba(0, 0, 0, 0.9);
+    position: relative;
+    top: 6px;
+}
+
+
+#ot_container{
+	min-width:100%;
+	min-height:100%;
+}
+
+#ot_machine{
+	border: 8px solid #F47321;
+	background-color: #F79D64;
+	border-radius: 12px 12px 12px 12px;
+	padding: 10px;
+	padding-bottom: 10px;
+
+}
+
+#wait{
+	display: none;
+}
+
+#wait p{
+	color: white;
+	display: inline-block;
+}
+
+#wait img {
+	display: inline-block;
+}
+
+#ot_issue_link{
+	display:none;
+}
+#credentials{
+
+	
+}
+
+#credentials input{
+	width: 275px;
+	height: 30px;
+	display:block;
+	margin-bottom:10px;
+
+}
+
+#credentials .button{
+
+}
+
+#projects{
+	
+	overflow: auto;
+	display:none;
+}
+
+#projects ul{
+	list-style: none;
+}
+#projects li{
+	background-color:white;
+	border-radius: 12px;
+	margin-bottom: 4px;
+	padding:4px;
+	
+}
+
+#project_go{
+	display:none;
+}
+
+#project_again{
+	display:none;
+}
+
+#issues{
+
+	overflow: auto;
+	display:none;
+}
+
+#issues ul{
+	list-style: none;
+}
+#issues li{
+	background-color:white;
+	border-radius: 12px;
+	margin-bottom: 4px;
+	padding:4px;
+	
+}
+
+#issue_go{
+	display:none;
+}
+
+#issue_again{
+	display:none;
+}
+
+
+#consultants{
+	
+	overflow: auto;
+	display:none;
+}
+
+#consultants ul{
+	list-style: none;
+}
+#consultants li{
+	background-color:white;
+	border-radius: 12px;
+	margin-bottom: 4px;
+	padding:4px;
+	
+}
+
+#consultant_go{
+	display:none;
+}
+
+#consultant_again{
+	display:none;
+}
+
+
+#creates{
+	
+	overflow: auto;
+	display:none;
+}
+
+#creates ul{
+	list-style: none;
+}
+#creates li{
+	background-color:white;
+	border-radius: 12px;
+	margin-bottom: 4px;
+	padding:4px;
+	
+}
+
+#create_go{
+	width:256px
+	
+}
+
+#create_form input{
+	width:275px;
+	height:30px;
+}
+
+#create_form textarea{
+	width:275px;
+	height:60px;
+}
+
+/*Mobile Layou*/
+@media only screen and (max-width: 1199px) {
+	.wrap{
+		width:100%;
+	}
+
+}/*End Mobile Layout*/
