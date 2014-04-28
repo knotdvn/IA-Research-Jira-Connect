@@ -1,7 +1,7 @@
 <?php
 	include('httpful.phar');
 	
-	//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////
 //this is also the app flow!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -15,7 +15,7 @@
 		"password" =>$password
 		));
         
-		$uri = "https://ot.syr.edu/rest/auth/latest/session" ;
+		$uri = "https://jira-dev.syr.edu/rest/auth/latest/session" ;
 		$response = \Httpful\Request::post($uri)
 		->sendsJson()
 		->body($data)
@@ -24,7 +24,7 @@
 		if(isset($response->body->errorMessages)){
 			$cookieName = "ERROR!!!";
 		}else{
-			$cookieName = $response->body->session->name;
+		$cookieName = $response->body->session->name;
 		$cookieValue = $response->body->session->value;
 		setcookie($cookieName, $cookieValue);
 		}
@@ -34,7 +34,6 @@
 	
 		
 	}//end function retrieve user cookie
-	
 	///end 1///
 	
 	
@@ -50,7 +49,7 @@
 			return false;
 		}
 		
-		$uri = "https://ot.syr.edu/rest/api/2/project";
+		$uri = "https://jira-dev.syr.edu/rest/api/2/project";
 		$response = \Httpful\Request::get($uri)
 		->sendsJson()
 		->addHeader('Cookie', $cookieName . "=" . $value)
@@ -90,7 +89,7 @@
 			return false;
 		}
 		
-		$uri = 'https://ot.syr.edu/rest/api/2/issue/createmeta?projectKeys=' . $projectKey . '&issuetypeId=null';
+		$uri = 'https://jira-dev.syr.edu/rest/api/2/issue/createmeta?projectKeys=' . $projectKey . '&issuetypeId=null';
 	$response = \Httpful\Request::get($uri)
 		->sendsJson()
 		->addHeader('Cookie', $cookieName . "=" . $value)
@@ -124,44 +123,6 @@
 	
 	
 	
-	//takes a project key and queries assignable users
-	//returns ul full of users
-	function query_users( $projectKey, $searchString, $cookieName){
-		if (isset($_COOKIE[$cookieName])){
-			$value = $_COOKIE[$cookieName];
-		}else{
-			return false;
-		}
-		
-		$uri = "https://ot.syr.edu/rest/api/2/user/assignable/search?username=" . $searchString . "&project=" . $projectKey;
-		$response = \Httpful\Request::get($uri)
-		->sendsJson()
-		->addHeader('Cookie', $cookieName . "=" . $value)
-		->sendIt();
-		if(isset($response->body->errorMessages)){
-			echo "ERROR!!!";
-		}else{
-		?>
-		
-		<ul>
-		<?php
-		
-		foreach($response->body as $user){ 
-
-			?>
-			<li name="<?php echo $user->name; ?>">
-				<?php echo $user->displayName; ?>
-			</li>
-			   
-		<?php	
-		}//end for each project object
-        ?>
-        </ul>
-		
-		
-	<?php	
-		}//end if error or data
-	}//end function query_users
 	
 	
 	
@@ -172,7 +133,8 @@
 	//this creates an issue with credentials, the project id is a number, summary and description are text, and due date is year-month-day 2013-2-14 is valentines day
 	
 	
-	function create_issue($projectKey, $issuetypeID, $summary, $description, $duedate, $cookieName ){
+	function create_issue($projectKey, $issuetypeID, $summary, $description,  $cookieName ){
+
 
 		if (isset($_COOKIE[$cookieName])){
 			$value = $_COOKIE[$cookieName];
@@ -191,12 +153,13 @@
 				"description" => $description,
 				"issuetype" => array(
 					"id" => $issuetypeID
-				),//end issuetype
-				"duedate" => $duedate
+				),
+				"customfield_10870" => "777777"
+
 			)//end fields
 		));//end data
 
-		$uri = "https://ot.syr.edu/rest/api/2/issue";
+		$uri = "https://jira-dev.syr.edu/rest/api/2/issue";
 		$response = \Httpful\Request::post($uri)
 		->sendsJson()
 		->addHeader('Cookie', $cookieName . "=" . $value)
@@ -206,42 +169,11 @@
 				echo $response;
 			//echo "ERROR!!!";
 		}else{
-			return  array("key"=>$response->body->key , "self" => $response->body->self); 
+			return  $response->body->key; 
 		}//end if no error
 	}//end function create issue
 	
 	
+		
+		
 	
-//this function takes cookie credentials, and a username to  be assigned to an issue number
-// the self property of the issue query object is used
-	function assign_user_to_issue( $assignee, $self, $cookieName){
-		if (isset($_COOKIE[$cookieName])){
-			$value = $_COOKIE[$cookieName];
-		}else{
-			return false;
-		}
-		
-		
-		 $data=json_encode(array(
-	        "fields" => array(
-				"assignee"=> array(
-					"name" =>$assignee
-				)//end assignee
-			)//end fields
-		));//end data
-
-		$uri = $self;
-		
-		$response = \Httpful\Request::put($uri)
-		->sendsJson()
-		->addHeader('Cookie', $cookieName . "=" . $value)
-		->body($data)
-		->sendIt();
-		if(isset($response->body->errorMessages)){
-			echo "ERROR!!!";
-		}else{
-		
-		}//end if no error in assignment
-		
-		
-	}//end function 

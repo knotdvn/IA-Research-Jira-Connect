@@ -1,4 +1,4 @@
-jQuery(document).ready(function($){
+$(document).ready(function(){
             //the first part of human behavior starts with the login button being clicked
             $('#ot_login').click(function(){
               $('#wait').show();
@@ -18,7 +18,7 @@ jQuery(document).ready(function($){
             //the 2nd part of human behaivor involves selecting a project
             
             var projectSelect;
-            $('#projects').delegate('li', 'click', function () {
+          $('#projects').delegate('li', 'click', function () {
           // do stuff on click
           $('#status').append('  2. ' + $(this).attr('key') );
           $('#status').attr('otprojectkey',(' 2. ' + $(this).attr('key') ) );
@@ -69,7 +69,7 @@ jQuery(document).ready(function($){
         //they have selected the right issue
         $('#issue_go').click(function(){
           $('#issues').hide();
-          $('#consultants').show();
+          $('#creates').show();
         });//end click
             
             //what if the chose the wrong issue
@@ -84,51 +84,6 @@ jQuery(document).ready(function($){
      
      
      
-     
-     
-           /////this is the fourth part of human interaction, the user searches for a consultant
-           $('#ot_consultant').change(function(){
-            jQuery('#wait').show();
-            if($(this).val() == ''){
-              //do nothing
-            }else{
-              //query users
-              otbot_find_user($(this).val(), $(projectSelect).attr('key'));         
-            }//we have a search string
-           });//end change value for consultant 
-           
-           //now they must select an assignee
-           var consultantSelect;
-            $('#consultants_list').delegate('li', 'click', function () {
-          // do stuff on click
-            $('#status').append('  4. ' + $(this).text());
-            consultantSelect = $(this);
-            
-            $('#consultant_go').show();
-            $('#consultants').find('ul').hide();
-            $('#consultants').find('h2').hide();
-            $('#consultants').find('p').hide();
-            $('#ot_consultant').hide();
-            $('#consultant_again').show();
-        });
-        
-        //they have the consultant lets move on
-        $('#consultant_go').click(function(){
-          $('#consultants').hide();
-          $('#creates').show();
-        });//end click
-            
-            //what if the chose the wrong consultant
-              $('#consultant_again').click(function(){
-                $('#consultant_go').hide();
-                $('#consultants').find('ul').show();
-                $('#consultants').find('h2').show();
-            $('#consultants').find('p').show();
-            $('#ot_consultant').show();
-                $('#consultant_again').hide();
-                 $('#status').text($('#status').attr('otusername') + $('#status').attr('otprojectkey' ) +  $('#status').attr('otissuetype') );
-
-              });//end function project again click 
         
             
             
@@ -139,11 +94,9 @@ jQuery(document).ready(function($){
               jQuery('#wait').show();
               otbot_create_issue(
                  $(projectSelect).attr('key'),
-                 $(consultantSelect).attr('name'),
                  $(issueSelect).attr('issueid'),
                  $('#ot_summary').val(),
-                 $('#ot_description').val(),
-                 $('#ot_duedate').val()
+                 $('#ot_description').val()
                );//end create issue ajax paramater list
             });
             

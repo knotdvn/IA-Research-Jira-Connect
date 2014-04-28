@@ -97,8 +97,6 @@ if( isSecure()){
 		        			<input id="ot_summary" type="text" placeholder="Issue Summary">
 		        			<h2>Issue Description</h2>
 		        			<textarea id="ot_description"></textarea>
-		        			<h2>Due Date</h2>
-		        			<input id="ot_duedate" placeholder="year-month-day">
 		        			<div id="create_go" class="button">Create Issue</div>
 		        		</div>
 		        	</div>
@@ -108,16 +106,11 @@ if( isSecure()){
 		        </div><!--container-->
         	</div><!-- wrap -->
         </div><!-- ribbon -->
-        
-        
-       <script src="apitalk/js/otbot-ajax.js"/>
-        <script src="apitalk/js/otbot-front.js" />
-        
-        
-        	
-        
 
-   
+       <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="apitalk/js/otbot-ajax.js"></script>
+       <script type="text/javascript" src="apitalk/js/otbot-front.js"></script>
+       
 
 	</body>
 </html>
